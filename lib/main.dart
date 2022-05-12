@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
           margin: EdgeInsets.all(20.0),
           child: Rating(
             score: 1.5,
-            stars: 8,
+            stars: 20,
           ),
         ),
       ),

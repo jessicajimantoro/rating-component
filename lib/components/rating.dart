@@ -5,7 +5,8 @@ class Rating extends StatefulWidget {
     Key? key,
     this.score = 0,
     this.stars = 5,
-  }) : super(key: key);
+  })  : assert(stars <= 20, 'stars shouldn\'t be more than 20'),
+        super(key: key);
 
   final double score;
   final int stars;
@@ -20,7 +21,6 @@ class _RatingState extends State<Rating> {
 
   @override
   Widget build(BuildContext context) {
-    print(_height);
     return Stack(
       alignment: Alignment.center,
       children: [
