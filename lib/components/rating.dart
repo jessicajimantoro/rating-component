@@ -5,7 +5,14 @@ class Rating extends StatefulWidget {
     Key? key,
     this.score = 0,
     this.stars = 5,
-  })  : assert(stars <= 20, 'stars shouldn\'t be more than 20'),
+  })  : assert(
+          stars >= 0 && stars <= 20,
+          'stars should be between 0 and 20',
+        ),
+        assert(
+          score >= 0 && score <= stars,
+          'score should be between 0 and stars total',
+        ),
         super(key: key);
 
   final double score;
