@@ -36,7 +36,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Rating(
-          score: 3.5,
+          score: 1.5,
+          stars: 5,
         ),
       ),
     );

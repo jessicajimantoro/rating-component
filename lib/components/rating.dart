@@ -4,9 +4,11 @@ class Rating extends StatefulWidget {
   Rating({
     Key? key,
     this.score = 0,
+    this.stars = 5,
   }) : super(key: key);
 
   final double score;
+  final int stars;
 
   @override
   _RatingState createState() => _RatingState();
@@ -14,18 +16,20 @@ class Rating extends StatefulWidget {
 
 class _RatingState extends State<Rating> {
   late double _score = widget.score;
+  late double _height = MediaQuery.of(context).size.width / widget.stars;
 
   @override
   Widget build(BuildContext context) {
+    print(_height);
     return Stack(
       alignment: Alignment.center,
       children: [
         SizedBox(
-          height: 50.0,
+          height: _height,
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: List<Widget>.generate(
-              5,
+              widget.stars,
               (index) {
                 return GestureDetector(
                   key: ValueKey(index + 1),
@@ -36,8 +40,8 @@ class _RatingState extends State<Rating> {
                   },
                   child: Container(
                     color: Colors.transparent,
-                    width: 50.0,
-                    height: 50.0,
+                    width: _height,
+                    height: _height,
                   ),
                 );
               },
@@ -47,11 +51,11 @@ class _RatingState extends State<Rating> {
         IgnorePointer(
           ignoring: true,
           child: SizedBox(
-            height: 50.0,
+            height: _height,
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: List<Widget>.filled(
-                5,
+                widget.stars,
                 Container(
                   child: Image.asset('images/star_grey.png'),
                 ),
@@ -62,13 +66,17 @@ class _RatingState extends State<Rating> {
         IgnorePointer(
           ignoring: true,
           child: SizedBox(
-            height: 50.0,
+            height: _height,
             child: ClipRect(
-              clipper: RatingClipper(_score),
+              clipper: RatingClipper(
+                _score,
+                _height,
+                widget.stars,
+              ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: List<Widget>.filled(
-                  5,
+                  widget.stars,
                   Container(
                     child: Image.asset('images/star.png'),
                   ),
@@ -84,12 +92,14 @@ class _RatingState extends State<Rating> {
 
 class RatingClipper extends CustomClipper<Rect> {
   final double score;
+  final double height;
+  final int stars;
 
-  RatingClipper(this.score);
+  RatingClipper(this.score, this.height, this.stars);
 
   @override
   Rect getClip(Size size) {
-    return const Offset(0, 0) & Size(size.width * score * 0.2, 50.0);
+    return const Offset(0, 0) & Size(size.width * score / stars, height);
   }
 
   @override
