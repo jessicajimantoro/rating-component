@@ -28,10 +28,9 @@ class _RatingState extends State<Rating> {
           height: _height,
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: List<Widget>.generate(
-              widget.stars,
-              (index) {
-                return GestureDetector(
+            children: List<Widget>.generate(widget.stars, (index) {
+              return Expanded(
+                child: GestureDetector(
                   key: ValueKey(index + 1),
                   onTap: () {
                     setState(() {
@@ -43,9 +42,9 @@ class _RatingState extends State<Rating> {
                     width: _height,
                     height: _height,
                   ),
-                );
-              },
-            ),
+                ),
+              );
+            }),
           ),
         ),
         IgnorePointer(
@@ -56,7 +55,7 @@ class _RatingState extends State<Rating> {
               mainAxisSize: MainAxisSize.min,
               children: List<Widget>.filled(
                 widget.stars,
-                Container(
+                Expanded(
                   child: Image.asset('images/star_grey.png'),
                 ),
               ),
@@ -77,7 +76,7 @@ class _RatingState extends State<Rating> {
                 mainAxisSize: MainAxisSize.min,
                 children: List<Widget>.filled(
                   widget.stars,
-                  Container(
+                  Expanded(
                     child: Image.asset('images/star.png'),
                   ),
                 ),

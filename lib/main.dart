@@ -35,9 +35,12 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Rating(
-          score: 1.5,
-          stars: 5,
+        child: Container(
+          margin: EdgeInsets.all(20.0),
+          child: Rating(
+            score: 1.5,
+            stars: 8,
+          ),
         ),
       ),
     );
