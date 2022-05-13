@@ -6,6 +6,7 @@ class Rating extends StatefulWidget {
     this.score = 0,
     this.stars = 5,
     this.padding = 2.0,
+    this.onStarSelected,
   })  : assert(
           stars >= 0 && stars <= 20,
           'stars should be between 0 and 20',
@@ -19,6 +20,7 @@ class Rating extends StatefulWidget {
   final double score;
   final double padding;
   final int stars;
+  final Function(double score)? onStarSelected;
 
   @override
   _RatingState createState() => _RatingState();
@@ -27,6 +29,12 @@ class Rating extends StatefulWidget {
 class _RatingState extends State<Rating> {
   late double _score = widget.score;
   late double _height = MediaQuery.of(context).size.width / widget.stars;
+
+  @override
+  void didUpdateWidget(covariant Rating oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _score = widget.score;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +53,7 @@ class _RatingState extends State<Rating> {
                     setState(() {
                       _score = index + 1;
                     });
+                    widget.onStarSelected?.call(_score);
                   },
                   child: Container(
                     color: Colors.transparent,

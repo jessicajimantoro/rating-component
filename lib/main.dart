@@ -28,6 +28,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late double _score = 5.5;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,8 +40,16 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Container(
           margin: EdgeInsets.all(20.0),
           child: Rating(
-            score: 5.5,
+            score: _score,
             stars: 10,
+            padding: 5.0,
+            onStarSelected: (double score) {
+              if (score == 1) {
+                setState(() {
+                  _score = 2;
+                });
+              }
+            },
           ),
         ),
       ),
