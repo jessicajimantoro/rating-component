@@ -5,6 +5,7 @@ class Rating extends StatefulWidget {
     Key? key,
     this.score = 0,
     this.stars = 5,
+    this.padding = 2.0,
   })  : assert(
           stars >= 0 && stars <= 20,
           'stars should be between 0 and 20',
@@ -16,6 +17,7 @@ class Rating extends StatefulWidget {
         super(key: key);
 
   final double score;
+  final double padding;
   final int stars;
 
   @override
@@ -63,7 +65,10 @@ class _RatingState extends State<Rating> {
               children: List<Widget>.filled(
                 widget.stars,
                 Expanded(
-                  child: Image.asset('images/star_grey.png'),
+                  child: Padding(
+                    padding: EdgeInsets.all(widget.padding),
+                    child: Image.asset('images/star_grey.png'),
+                  ),
                 ),
               ),
             ),
@@ -84,7 +89,10 @@ class _RatingState extends State<Rating> {
                 children: List<Widget>.filled(
                   widget.stars,
                   Expanded(
-                    child: Image.asset('images/star.png'),
+                    child: Padding(
+                      padding: EdgeInsets.all(widget.padding),
+                      child: Image.asset('images/star.png'),
+                    ),
                   ),
                 ),
               ),
