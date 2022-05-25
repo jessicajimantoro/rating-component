@@ -43,13 +43,6 @@ class _MyHomePageState extends State<MyHomePage> {
             score: _score,
             stars: 10,
             padding: 5.0,
-            onStarSelected: (double score) {
-              if (score == 1) {
-                setState(() {
-                  _score = 2;
-                });
-              }
-            },
           ),
         ),
       ),
